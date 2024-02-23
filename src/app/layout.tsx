@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/sidebar/index";
 import Header from "@/components/Header";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["200", "400", "500", "600", "700", "800"],
+});
 
 export const metadata: Metadata = {
   title: "My Qur'an",
@@ -18,7 +21,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={poppins.className}>
         <main>
           <div className="border-t">
             <div className="bg-background">
@@ -29,6 +32,7 @@ export default async function RootLayout({
                 <div className="col-span-3 overflow-auto lg:col-span-5 lg:border-l w-[93%] bg-[#f1f4f9]">
                   <div className="px-6 py-6 lg:px-8">
                     <Header />
+                    <div className="grid grid-cols-4 gap-5"></div>
                     {children}
                   </div>
                 </div>

@@ -29,6 +29,7 @@ export default function Sidebar() {
                 </Button>
               </Link>
             </ButtonSidebar>
+
             <ButtonSidebar text="Favorite">
               <Link href="/favorite">
                 <Button
