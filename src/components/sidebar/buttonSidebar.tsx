@@ -18,7 +18,7 @@ export default function ButtonSidebar({ text, children }: Props) {
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>{children}</TooltipTrigger>
-        <TooltipContent className="bg-black text-white">
+        <TooltipContent className="bg-black text-white" side="right">
           <p>{text}</p>
         </TooltipContent>
       </Tooltip>
