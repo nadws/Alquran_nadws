@@ -37,7 +37,10 @@ const ListSurah = ({}) => {
       <ScrollArea className="h-screen w-full ">
         <div className=" grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-5">
           {data.data.map((item) => (
-            <div className="cursor-pointer rounded-lg bg-white mb-5 lg:mb-0">
+            <div
+              key={item.nomor}
+              className="cursor-pointer rounded-lg bg-white mb-5 lg:mb-0"
+            >
               <Link href={`/list-surah/${encodeURIComponent(item.nomor)}`}>
                 <div className="h-36 p-6">
                   <div className="flex justify-between items-center">
