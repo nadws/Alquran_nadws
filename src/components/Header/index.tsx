@@ -22,7 +22,7 @@ export default function Header() {
           <IoSunny className="text-xl hidden dark:block text-[#38a482]" />
         </Button>
       </div>
-      <div
+      {/* <div
         className={`w-[80%] lg:w-[30%] ${
           pathname === "/list-surah" ? "block" : "hidden"
         }`}
@@ -32,7 +32,7 @@ export default function Header() {
           placeholder="Search"
           className="h-8 border border-slate-400"
         />
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -8,17 +8,17 @@ import { usePathname } from "next/navigation";
 export default function Fotbar() {
   const pathname = usePathname();
   return (
-    <div className="bg-background bottom-0  w-full fixed z-10 flex justify-center rounded-lg  lg:hidden">
+    <div className="bg-white dark:bg-black h-14 bottom-0  w-full fixed z-10 flex justify-center lg:hidden">
       <Link href="/list-surah">
         <Button
           variant={"ghost"}
-          className=" justify-center rounded-md  hover:text-primary"
+          className=" justify-center h-full  hover:text-primary"
         >
           <GoBook
             className={
               pathname === "/list-surah"
-                ? "text-xl text-center  text-[#38a482]"
-                : "text-xl text-center  text-black"
+                ? "text-2xl text-center  text-[#38a482]"
+                : "text-2xl text-center  "
             }
           />
         </Button>
@@ -26,13 +26,13 @@ export default function Fotbar() {
       <Link href="/favorite">
         <Button
           variant={"ghost"}
-          className=" justify-center rounded-md  hover:text-primary"
+          className=" justify-center h-full  hover:text-primary"
         >
           <GoHeart
             className={
               pathname === "/favorite"
-                ? "text-xl text-center  text-[#38a482]"
-                : "text-xl text-center  text-black"
+                ? "text-2xl text-center  text-[#38a482]"
+                : "text-2xl text-center  "
             }
           />
         </Button>
