@@ -5,7 +5,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useState, useEffect } from "react";
 import { GoBookmark, GoHeart } from "react-icons/go";
 import DaftarSurah from "@/components/surah/index";
-export default function Detail({ params }) {
+
+const Detail = ({ params }) => {
   const [data, setData] = useState(null);
   // const [dataAyat, setDataAyat] = useState(null);
   const [isLoading, setLoading] = useState(true);
@@ -69,4 +70,4 @@ export default function Detail({ params }) {
       </ScrollArea>
     </div>
   );
-}
+};
