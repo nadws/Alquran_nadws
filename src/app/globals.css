@@ -1,6 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: LPMQ;
+  src: url("../font/LPMQ\ IsepMisbah.ttf") format("opentype");
+}
  
 @layer base {
   :root {
@@ -63,6 +68,10 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+  }
+
+  .active{
+    @apply  border-[#4df0bc] border-4
   }
 }
  

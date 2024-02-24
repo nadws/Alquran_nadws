@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/sidebar/index";
-import Header from "@/components/Header";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -26,15 +25,11 @@ export default async function RootLayout({
           <div className="border-t">
             <div className="bg-background">
               <div className="flex flex-row">
-                <div className="hidde lg:block w-[7%]">
+                <div className="hidden lg:block w-[7%]">
                   <Sidebar />
                 </div>
-                <div className="col-span-3 overflow-auto lg:col-span-5 lg:border-l w-[93%] bg-[#f1f4f9]">
-                  <div className="px-6 py-6 lg:px-8">
-                    <Header />
-                    <div className="grid grid-cols-4 gap-5"></div>
-                    {children}
-                  </div>
+                <div className="w-[100%] col-span-3 overflow-auto lg:col-span-5 lg:border-l lg:w-[93%] bg-[#f1f4f9]">
+                  <div className="px-4 py-6 lg:px-8">{children}</div>
                 </div>
               </div>
             </div>

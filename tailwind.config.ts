@@ -15,6 +15,7 @@ const config = {
       padding: "2rem",
       screens: {
         "2xl": "1400px",
+      
       },
     },
     extend: {
@@ -71,6 +72,9 @@ const config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      fontFamily: {
+        'lpmq': ['LPMQ', 'sans-serif'],
       },
     },
   },
