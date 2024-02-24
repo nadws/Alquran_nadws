@@ -37,11 +37,8 @@ const Detail = ({ params }) => {
         <DaftarSurah params={params.detail} />
       </div>
       <ScrollArea className="h-screen lg:w-[70%] w-[100%]  ">
-        {data.data.ayat.map((item) => (
-          <div
-            key={item.nomorAyat}
-            className="grid grid-rows-1 mb-9 bg-white p-8"
-          >
+        {data.data.ayat.map((item, index) => (
+          <div key={index} className="grid grid-rows-1 mb-9 bg-white p-8">
             <div className="flex justify-between items-center mb-10">
               <div className="text-lg rounded-full bg-[#ECFDF5] px-3 py-1">
                 {item.nomorAyat}
