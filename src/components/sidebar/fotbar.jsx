@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 export default function Fotbar() {
   const pathname = usePathname();
   return (
-    <div className="bg-white dark:bg-black h-14 bottom-0  w-full fixed z-10 flex justify-center lg:hidden">
+    <div className="bg-white dark:bg-[#353535] h-14 bottom-0  w-full fixed z-10 flex justify-center lg:hidden">
       <Link href="/list-surah">
         <Button
           variant={"ghost"}

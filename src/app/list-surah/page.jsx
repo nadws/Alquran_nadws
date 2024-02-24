@@ -35,7 +35,7 @@ const ListSurah = ({}) => {
   return (
     <>
       <ScrollArea className="h-screen w-full ">
-        <div className=" grid grid-cols-1 p-3 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-5">
+        <div className=" grid grid-cols-1 p-3 gap-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-5">
           {data.data.map((item) => (
             <Card
               key={item.nomor}
