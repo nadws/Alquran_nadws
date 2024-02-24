@@ -71,3 +71,5 @@ const Detail = ({ params }) => {
     </div>
   );
 };
+
+export default Detail;
