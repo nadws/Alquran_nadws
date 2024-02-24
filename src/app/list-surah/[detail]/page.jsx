@@ -8,9 +8,7 @@ import DaftarSurah from "@/components/surah/index";
 
 const Detail = ({ params }) => {
   const [data, setData] = useState(null);
-  // const [dataAyat, setDataAyat] = useState(null);
   const [isLoading, setLoading] = useState(true);
-  // const [isLoadingAyat, setLoadingAyat] = useState(true);
 
   useEffect(() => {
     fetch(`https://equran.id/api/v2/surat/${params.detail}`)
@@ -19,7 +17,7 @@ const Detail = ({ params }) => {
         setData(data);
         setLoading(false);
       });
-  }, []);
+  }, [params.detail]);
 
   if (isLoading)
     return (
