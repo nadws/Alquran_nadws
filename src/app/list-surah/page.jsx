@@ -1,6 +1,7 @@
 "use client";
-import Header from "@/components/Header";
+
 import { Card, CardContent } from "@/components/ui/card";
+
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
@@ -33,31 +34,32 @@ const ListSurah = ({}) => {
 
   return (
     <>
-      <Header />
       <ScrollArea className="h-screen w-full ">
-        <div className=" grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-5">
+        <div className=" grid grid-cols-1 p-3 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-5">
           {data.data.map((item) => (
-            <div
+            <Card
               key={item.nomor}
-              className="cursor-pointer rounded-lg bg-white mb-5 lg:mb-0"
+              className="cursor-pointer rounded-lg  mb-1 lg:mb-0"
             >
               <Link href={`/list-surah/${encodeURIComponent(item.nomor)}`}>
-                <div className="h-36 p-6">
+                <CardContent className="p-4">
                   <div className="flex justify-between items-center">
-                    <div className="text-1xl rounded-full bg-cyan-100 px-3 py-1">
+                    <div className="text-1xl rounded-full bg-cyan-100 dark:bg-[#38a482] px-3 py-1">
                       {item.nomor}
                     </div>
                     <div>
-                      <GoHeart className="text-4xl" />
+                      <GoHeart className="text-2xl lg:text-4xl text-slate-400" />
                     </div>
                   </div>
-                  <div className="py-6 ">
-                    <h6 className="font-bold">{item.namaLatin}</h6>
-                    <p>{item.arti}</p>
+                  <div className="mt-4">
+                    <p className="font-bold text-sm lg:text-base">
+                      {item.namaLatin}
+                    </p>
+                    <p className="text-sm lg:text-base">{item.arti}</p>
                   </div>
-                </div>
+                </CardContent>
               </Link>
-            </div>
+            </Card>
           ))}
         </div>
       </ScrollArea>

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { GoHeart } from "react-icons/go";
 import Link from "next/link";
+import { Card, CardContent } from "../ui/card";
 
 export default function DaftarSurah({ params }) {
   const [dataAyat, setDataAyat] = useState(null);
@@ -22,16 +23,16 @@ export default function DaftarSurah({ params }) {
         {dataAyat &&
           dataAyat.data &&
           dataAyat.data.map((item) => (
-            <div
-              className={`cursor-pointer rounded-lg bg-white mb-5 lg:mb-0 ${
+            <Card
+              className={`cursor-pointer rounded-lg  mb-5 lg:mb-0 ${
                 params == item.nomor ? "active" : ""
               }`}
               key={item.nomor}
             >
               <Link href={`/list-surah/${encodeURIComponent(item.nomor)}`}>
-                <div className="h-36 p-6">
+                <CardContent className="h-36 p-6">
                   <div className="flex justify-between items-center">
-                    <div className="text-1xl rounded-full bg-cyan-100 px-3 py-1">
+                    <div className="text-1xl rounded-full bg-cyan-100 dark:bg-[#38a482]  px-3 py-1">
                       {item.nomor}
                     </div>
                     <div>
@@ -42,9 +43,9 @@ export default function DaftarSurah({ params }) {
                     <h6 className="font-bold">{item.namaLatin}</h6>
                     <p>{item.arti}</p>
                   </div>
-                </div>
+                </CardContent>
               </Link>
-            </div>
+            </Card>
           ))}
       </div>
     </ScrollArea>

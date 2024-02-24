@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/sidebar/index";
+import Fotbar from "@/components/sidebar/fotbar";
+import { ThemeProvider } from "@/components/ui/theme-provider";
+import Header from "@/components/Header/index";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -21,20 +24,29 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <main>
-          <div className="border-t">
-            <div className="bg-background">
-              <div className="flex flex-row">
-                <div className="hidden lg:block w-[7%]">
-                  <Sidebar />
-                </div>
-                <div className="w-[100%] col-span-3 overflow-auto lg:col-span-5 lg:border-l lg:w-[93%] bg-[#f1f4f9]">
-                  <div className="px-4 py-6 lg:px-8">{children}</div>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <main>
+            <div className="border-t">
+              <div className="bg-background">
+                <div className="flex flex-row justify-center">
+                  <div className="hidden lg:block w-[7%]">
+                    <Sidebar />
+                  </div>
+                  <div className="w-[100%] col-span-3 overflow-auto lg:col-span-5 lg:border-l lg:w-[93%] bg-[#f1f4f9] dark:bg-[#353535]">
+                    <Header />
+                    {children}
+                  </div>
+                  <Fotbar />
                 </div>
               </div>
             </div>
-          </div>
-        </main>
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   );

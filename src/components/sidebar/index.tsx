@@ -23,7 +23,7 @@ export default function Sidebar() {
                     className={
                       pathname === "/list-surah"
                         ? "text-5xl text-center  text-[#38a482]"
-                        : "text-5xl text-center  text-black"
+                        : "text-5xl text-center"
                     }
                   />
                 </Button>
@@ -40,7 +40,7 @@ export default function Sidebar() {
                     className={
                       pathname === "/favorite"
                         ? "text-5xl text-center  text-[#38a482]"
-                        : "text-5xl text-center  text-black"
+                        : "text-5xl text-center"
                     }
                   />
                 </Button>
