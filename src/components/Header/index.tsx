@@ -10,29 +10,20 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <div className="pb-3 mb-2 p-2 flex flex-row items-center justify-between bg-background  top-0 w-full">
-      <div className="w-[20%]">
+    <div className="pb-3 mb-2 p-2 flex border border-border flex-row items-center justify-between bg-background  top-0 w-full">
+      <div></div>
+      <div className="w-[20%] ">
         <Button
           onClick={() =>
             theme == "dark" ? setTheme("light") : setTheme("dark")
           }
           variant={"ghost"}
+          className="float-end"
         >
-          <IoMoon className="text-xl dark:hidden text-[#38a482]" />
-          <IoSunny className="text-xl hidden dark:block text-[#38a482]" />
+          <IoMoon className="text-2xl dark:hidden text-[#38a482]" />
+          <IoSunny className="text-2xl hidden dark:block text-[#38a482]" />
         </Button>
       </div>
-      {/* <div
-        className={`w-[80%] lg:w-[30%] ${
-          pathname === "/list-surah" ? "block" : "hidden"
-        }`}
-      >
-        <Input
-          type="text"
-          placeholder="Search"
-          className="h-8 border border-slate-400"
-        />
-      </div> */}
     </div>
   );
 }

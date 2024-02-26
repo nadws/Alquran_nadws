@@ -4,6 +4,7 @@ import { GoBook, GoHeart } from "react-icons/go";
 import { Button } from "../ui/button";
 import ButtonSidebar from "./buttonSidebar";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -11,7 +12,14 @@ export default function Sidebar() {
     <div className="pb-12 min-h-screen ">
       <div className="space-y-4 py-4">
         <div className="px-3 py-2">
-          <h2 className="mb-32 px-4 text-lg font-semibold">Logo</h2>
+          <h2 className="mb-32 px-4 text-lg font-semibold">
+            <Image
+              src="/quran.png"
+              width={500}
+              height={500}
+              alt="Picture of the author"
+            />
+          </h2>
           <div>
             <ButtonSidebar text="Surah">
               <Link href="/list-surah">
