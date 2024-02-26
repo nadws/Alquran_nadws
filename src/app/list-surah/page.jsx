@@ -40,6 +40,13 @@ const ListSurah = ({}) => {
   // if (isLoading) return <p>loading ..</p>;
   if (!data) return <></>;
 
+  const handleHeartClick = (item, event) => {
+    const existingData =
+      JSON.parse(localStorage.getItem("favoriteItems")) || [];
+    const updatedData = [...existingData, item];
+    localStorage.setItem("favoriteItems", JSON.stringify(updatedData));
+  };
+
   return (
     <>
       <Suspense fallback={<Loading />}>
@@ -66,7 +73,13 @@ const ListSurah = ({}) => {
                         {item.nomor}
                       </div>
                       <div>
-                        <GoHeart className="text-2xl lg:text-4xl text-slate-400" />
+                        <GoHeart
+                          className="text-2xl lg:text-4xl text-slate-400 cursor-pointer"
+                          onClick={(event) => {
+                            event.stopPropagation(); // Menghentikan penyebaran event
+                            handleHeartClick(item, event);
+                          }}
+                        />
                       </div>
                     </div>
                     <div className="mt-4">

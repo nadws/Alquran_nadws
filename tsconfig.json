@@ -32,7 +32,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/list-surah/page.jsx"
+    "src/app/list-surah/page.jsx",
+    "src/app/favorite/page.jsx"
   ],
   "exclude": [
     "node_modules"
