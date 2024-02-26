@@ -13,6 +13,8 @@ const ListSurah = ({}) => {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [favoriteItems, setFavoriteItems] = useState([]);
+
   useEffect(() => {
     fetch("https://equran.id/api/v2/surat")
       .then((res) => res.json())
@@ -25,9 +27,36 @@ const ListSurah = ({}) => {
         setLoading(false);
       });
   }, []);
+
+  useEffect(() => {
+    const storedFavoriteItems = localStorage.getItem("favoriteItems");
+    if (storedFavoriteItems) {
+      const parsedFavoriteItems = JSON.parse(storedFavoriteItems);
+      setFavoriteItems(parsedFavoriteItems);
+      setLoading(false);
+    } else {
+      setLoading(false);
+    }
+  }, []);
+
+  const handleHeartClick = (item, event) => {
+    const isItemInFavorites = favoriteItems.some(
+      (favoriteItem) => favoriteItem.nomor === item.nomor
+    );
+    if (!isItemInFavorites) {
+      const updatedFavoriteItems = [...favoriteItems, item];
+      localStorage.setItem(
+        "favoriteItems",
+        JSON.stringify(updatedFavoriteItems)
+      );
+      setFavoriteItems(updatedFavoriteItems);
+    }
+  };
+
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
+
   const filteredData = data
     ? data.data.filter((item) => {
         const searchTermRegex = new RegExp(
@@ -38,14 +67,7 @@ const ListSurah = ({}) => {
     : [];
 
   // if (isLoading) return <p>loading ..</p>;
-  if (!data) return <></>;
-
-  const handleHeartClick = (item, event) => {
-    const existingData =
-      JSON.parse(localStorage.getItem("favoriteItems")) || [];
-    const updatedData = [...existingData, item];
-    localStorage.setItem("favoriteItems", JSON.stringify(updatedData));
-  };
+  if (!data) return null;
 
   return (
     <>
@@ -73,6 +95,12 @@ const ListSurah = ({}) => {
                         {item.nomor}
                       </div>
                       <div>
+                        {favoriteItems.some(
+                          (favoriteItem) => favoriteItem.nomor === item.nomor
+                        )
+                          ? "ada"
+                          : "tidak ada"}
+
                         <GoHeart
                           className="text-2xl lg:text-4xl text-slate-400 cursor-pointer"
                           onClick={(event) => {
