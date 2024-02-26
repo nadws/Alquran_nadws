@@ -76,7 +76,7 @@ const ListSurah = ({}) => {
                         <GoHeart
                           className="text-2xl lg:text-4xl text-slate-400 cursor-pointer"
                           onClick={(event) => {
-                            event.stopPropagation(); // Menghentikan penyebaran event
+                            event.preventDefault(); // Menghentikan penyebaran event
                             handleHeartClick(item, event);
                           }}
                         />
