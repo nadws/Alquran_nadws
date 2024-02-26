@@ -45,13 +45,6 @@ const ListSurah = ({}) => {
       <Suspense fallback={<Loading />}>
         <ScrollArea className="h-screen w-full ">
           <div className="flex items-center justify-center mt-4">
-            {/* <input
-              type="text"
-              placeholder="Search surah..."
-              value={searchTerm}
-              onChange={handleSearch}
-              className="border border-gray-300 rounded-md py-2 px-4"
-            /> */}
             <Input
               type="text"
               value={searchTerm}

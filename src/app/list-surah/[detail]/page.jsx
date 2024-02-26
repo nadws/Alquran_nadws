@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { GoBookmark, GoHeart } from "react-icons/go";
 import DaftarSurah from "@/components/surah/index";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
+
 import Link from "next/link";
 
 const Detail = ({ params }) => {
@@ -30,42 +30,12 @@ const Detail = ({ params }) => {
   return (
     <div className="grid grid-cols-1 lg:flex lg:flex-row">
       <div className="lg:w-[30%] w-[100%] lg:mr-5 p-1 lg:p-0">
-        <div className="flex  justify-between lg:hidden">
-          <div className="py-3">
-            {params.detail !== "1" && (
-              <Link
-                href={`/list-surah/${encodeURIComponent(
-                  parseInt(params.detail) - 1
-                )}`}
-              >
-                <FaCaretLeft className="text-2xl text-[#38a482]" />
-              </Link>
-            )}
-          </div>
-          <div className="">
-            <p className="text-center text-sm font-bold ">
-              {data.data.namaLatin}
-            </p>
-            <p className="text-center text-sm font-normal ">
-              {data.data.jumlahAyat} Ayat
-            </p>
-            <p className="text-center text-sm font-light italic ">
-              ({data.data.arti})
-            </p>
-          </div>
-          <div className="py-3">
-            {params.detail !== "114" && (
-              <Link
-                href={`/list-surah/${encodeURIComponent(
-                  parseInt(params.detail) + 1
-                )}`}
-              >
-                <FaCaretRight className="text-2xl text-[#38a482]" />
-              </Link>
-            )}
-          </div>
-        </div>
-        <DaftarSurah params={params.detail} />
+        <DaftarSurah
+          params={params.detail}
+          namaLatin={data.data.namaLatin}
+          jumlahAyat={data.data.jumlahAyat}
+          arti={data.data.arti}
+        />
       </div>
       <ScrollArea className="h-screen lg:w-[70%] w-[100%]  ">
         {data.data.ayat.map((item) => (
