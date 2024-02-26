@@ -37,7 +37,7 @@ export default async function RootLayout({
                   <div className="hidden lg:block w-[7%]">
                     <Sidebar />
                   </div>
-                  <div className="w-[100%] col-span-3 overflow-auto lg:col-span-5 lg:border-l lg:w-[93%] bg-[#f1f4f9] dark:bg-[#353535]">
+                  <div className="w-[100%] col-span-3 overflow-auto lg:col-span-5 lg:border-l lg:w-[93%] bg-background">
                     <Header />
                     {children}
                   </div>
