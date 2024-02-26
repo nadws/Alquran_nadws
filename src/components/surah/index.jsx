@@ -18,7 +18,7 @@ export default function DaftarSurah({ params }) {
   }, []);
 
   return (
-    <ScrollArea className="h-screen w-full ">
+    <ScrollArea className="h-screen w-full hidden lg:block">
       <div className=" grid grid-cols-1 gap-3">
         {dataAyat &&
           dataAyat.data &&

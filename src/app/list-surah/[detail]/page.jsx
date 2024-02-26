@@ -6,6 +6,8 @@ import { useState, useEffect } from "react";
 import { GoBookmark, GoHeart } from "react-icons/go";
 import DaftarSurah from "@/components/surah/index";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
+import Link from "next/link";
 
 const Detail = ({ params }) => {
   const [data, setData] = useState(null);
@@ -26,15 +28,50 @@ const Detail = ({ params }) => {
   if (!data) return <p>No profile data</p>;
 
   return (
-    <div className="flex flex-row">
-      <div className="w-[30%] hidden lg:block  mr-5">
+    <div className="grid grid-cols-1 lg:flex lg:flex-row">
+      <div className="lg:w-[30%] w-[100%] lg:mr-5 p-1 lg:p-0">
+        <div className="flex  justify-between lg:hidden">
+          <div className="py-3">
+            {params.detail !== "1" && (
+              <Link
+                href={`/list-surah/${encodeURIComponent(
+                  parseInt(params.detail) - 1
+                )}`}
+              >
+                <FaCaretLeft className="text-2xl text-[#38a482]" />
+              </Link>
+            )}
+          </div>
+          <div className="">
+            <p className="text-center text-sm font-bold ">
+              {data.data.namaLatin}
+            </p>
+            <p className="text-center text-sm font-normal ">
+              {data.data.jumlahAyat} Ayat
+            </p>
+            <p className="text-center text-sm font-light italic ">
+              ({data.data.arti})
+            </p>
+          </div>
+          <div className="py-3">
+            {params.detail !== "114" && (
+              <Link
+                href={`/list-surah/${encodeURIComponent(
+                  parseInt(params.detail) + 1
+                )}`}
+              >
+                <FaCaretRight className="text-2xl text-[#38a482]" />
+              </Link>
+            )}
+          </div>
+        </div>
         <DaftarSurah params={params.detail} />
       </div>
       <ScrollArea className="h-screen lg:w-[70%] w-[100%]  ">
         {data.data.ayat.map((item) => (
           <div
             key={item.nomorAyat}
-            className="grid grid-rows-1 mb-2 bg-background p-8 rounded-lg"
+            className="grid grid-rows-1 mb-2 bg-background border border-border p-8 rounded-lg"
           >
             <div className="flex justify-between items-center mb-10">
               <div className="text-lg rounded-full bg-cyan-100 dark:bg-[#38a482] px-3 py-1">
