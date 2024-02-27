@@ -6,9 +6,11 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
 import { useState, useEffect, Suspense } from "react";
-import { GoHeart } from "react-icons/go";
+import { GoHeart, GoHeartFill } from "react-icons/go";
 import Loading from "@/app/list-surah/loading";
 import { Input } from "@/components/ui/input";
+import { IoMdHeart } from "react-icons/io";
+import { TiHeartFullOutline } from "react-icons/ti";
 const ListSurah = ({}) => {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
@@ -52,6 +54,14 @@ const ListSurah = ({}) => {
       setFavoriteItems(updatedFavoriteItems);
     }
   };
+  const removeFromFavorites = (item) => {
+    const existingData =
+      JSON.parse(localStorage.getItem("favoriteItems")) || [];
+    const updatedData = existingData.filter((el) => el.nomor !== item.nomor);
+
+    setFavoriteItems(updatedData);
+    localStorage.setItem("favoriteItems", JSON.stringify(updatedData));
+  };
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -72,16 +82,16 @@ const ListSurah = ({}) => {
   return (
     <>
       <Suspense fallback={<Loading />}>
-        <ScrollArea className="h-screen w-full ">
-          <div className="flex items-center justify-center mt-4">
-            <Input
-              type="text"
-              value={searchTerm}
-              onChange={handleSearch}
-              placeholder="Search surah..."
-              className="h-10 border border-slate-400 w-[90%] md:w-[70%] lg:w-[60%]"
-            />
-          </div>
+        <div className="flex items-center justify-center mt-4 mb-4">
+          <Input
+            type="text"
+            value={searchTerm}
+            onChange={handleSearch}
+            placeholder="Search surah..."
+            className="h-10 border border-slate-400 w-[90%] md:w-[70%] lg:w-[60%]"
+          />
+        </div>
+        <ScrollArea className="h-screen w-full mb-14">
           <div className=" grid grid-cols-1 p-3 gap-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-5">
             {filteredData.map((item) => (
               <Card
@@ -97,17 +107,23 @@ const ListSurah = ({}) => {
                       <div>
                         {favoriteItems.some(
                           (favoriteItem) => favoriteItem.nomor === item.nomor
-                        )
-                          ? "ada"
-                          : "tidak ada"}
-
-                        <GoHeart
-                          className="text-2xl lg:text-4xl text-slate-400 cursor-pointer"
-                          onClick={(event) => {
-                            event.preventDefault(); // Menghentikan penyebaran event
-                            handleHeartClick(item, event);
-                          }}
-                        />
+                        ) ? (
+                          <GoHeartFill
+                            className="text-2xl lg:text-4xl text-[#38a482] cursor-pointer"
+                            onClick={(event) => {
+                              event.preventDefault();
+                              removeFromFavorites(item, event);
+                            }}
+                          />
+                        ) : (
+                          <GoHeart
+                            className="text-2xl lg:text-4xl text-slate-400 cursor-pointer"
+                            onClick={(event) => {
+                              event.preventDefault(); // Menghentikan penyebaran event
+                              handleHeartClick(item, event);
+                            }}
+                          />
+                        )}
                       </div>
                     </div>
                     <div className="mt-4">

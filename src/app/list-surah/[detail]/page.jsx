@@ -37,7 +37,7 @@ const Detail = ({ params }) => {
           arti={data.data.arti}
         />
       </div>
-      <ScrollArea className="h-screen lg:w-[70%] w-[100%]  ">
+      <ScrollArea className="h-screen lg:w-[70%] w-[100%] mb-16 ">
         {data.data.ayat.map((item) => (
           <div
             key={item.nomorAyat}
