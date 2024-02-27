@@ -7,8 +7,6 @@ import { GoBookmark, GoHeart } from "react-icons/go";
 import DaftarSurah from "@/components/surah/index";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
-import Link from "next/link";
-
 const Detail = ({ params }) => {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);

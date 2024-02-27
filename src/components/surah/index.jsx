@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { GoHeart } from "react-icons/go";
+import { GoHeart, GoHeartFill } from "react-icons/go";
 import Link from "next/link";
 import { Card, CardContent } from "../ui/card";
 import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
@@ -9,6 +9,8 @@ import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
 export default function DaftarSurah({ params, namaLatin, jumlahAyat, arti }) {
   const [dataAyat, setDataAyat] = useState(null);
   const [isLoadingAyat, setLoadingAyat] = useState(true);
+  const [favoriteItems, setFavoriteItems] = useState([]);
+  const [isLoading, setLoading] = useState(true);
   useEffect(() => {
     fetch("https://equran.id/api/v2/surat")
       .then((res) => res.json())
@@ -17,6 +19,39 @@ export default function DaftarSurah({ params, namaLatin, jumlahAyat, arti }) {
         setLoadingAyat(false);
       });
   }, []);
+
+  useEffect(() => {
+    const storedFavoriteItems = localStorage.getItem("favoriteItems");
+    if (storedFavoriteItems) {
+      const parsedFavoriteItems = JSON.parse(storedFavoriteItems);
+      setFavoriteItems(parsedFavoriteItems);
+      setLoading(false);
+    } else {
+      setLoading(false);
+    }
+  }, []);
+
+  const handleHeartClick = (item, event) => {
+    const isItemInFavorites = favoriteItems.some(
+      (favoriteItem) => favoriteItem.nomor === item.nomor
+    );
+    if (!isItemInFavorites) {
+      const updatedFavoriteItems = [...favoriteItems, item];
+      localStorage.setItem(
+        "favoriteItems",
+        JSON.stringify(updatedFavoriteItems)
+      );
+      setFavoriteItems(updatedFavoriteItems);
+    }
+  };
+  const removeFromFavorites = (item) => {
+    const existingData =
+      JSON.parse(localStorage.getItem("favoriteItems")) || [];
+    const updatedData = existingData.filter((el) => el.nomor !== item.nomor);
+
+    setFavoriteItems(updatedData);
+    localStorage.setItem("favoriteItems", JSON.stringify(updatedData));
+  };
 
   return (
     <>
@@ -63,7 +98,25 @@ export default function DaftarSurah({ params, namaLatin, jumlahAyat, arti }) {
                         {item.nomor}
                       </div>
                       <div>
-                        <GoHeart className="text-4xl" />
+                        {favoriteItems.some(
+                          (favoriteItem) => favoriteItem.nomor === item.nomor
+                        ) ? (
+                          <GoHeartFill
+                            className="text-2xl lg:text-4xl text-[#38a482] cursor-pointer"
+                            onClick={(event) => {
+                              event.preventDefault();
+                              removeFromFavorites(item, event);
+                            }}
+                          />
+                        ) : (
+                          <GoHeart
+                            className="text-2xl lg:text-4xl text-slate-400 cursor-pointer"
+                            onClick={(event) => {
+                              event.preventDefault(); // Menghentikan penyebaran event
+                              handleHeartClick(item, event);
+                            }}
+                          />
+                        )}
                       </div>
                     </div>
                     <div className="py-6 ">
