@@ -62,7 +62,7 @@ const Detail = ({ params }) => {
     const existingData =
       JSON.parse(localStorage.getItem("bookmarkItems")) || [];
     const updatedData = existingData.filter(
-      (el) => el.nomorAyat !== item.nomorAyat || el.namaSurah !== item.namaSurah
+      (el) => el.nomorAyat !== item.nomorAyat || el.nomorSurah !== params.detail
     );
 
     setBookMarkItems(updatedData);
