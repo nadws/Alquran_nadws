@@ -1,10 +1,11 @@
 "use client";
 import Link from "next/link";
-import { GoBook, GoHeart } from "react-icons/go";
+import { GoBook, GoBookmark, GoHeart } from "react-icons/go";
 import { Button } from "../ui/button";
 import ButtonSidebar from "./buttonSidebar";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { HiOutlineBookOpen } from "react-icons/hi";
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -27,7 +28,7 @@ export default function Sidebar() {
                   variant={"ghost"}
                   className="w-full justify-center rounded-none  hover:text-primary mb-10"
                 >
-                  <GoBook
+                  <HiOutlineBookOpen
                     className={
                       pathname === "/list-surah"
                         ? "text-5xl text-center  text-[#38a482]"
@@ -47,6 +48,22 @@ export default function Sidebar() {
                   <GoHeart
                     className={
                       pathname === "/favorite"
+                        ? "text-5xl text-center  text-[#38a482]"
+                        : "text-5xl text-center"
+                    }
+                  />
+                </Button>
+              </Link>
+            </ButtonSidebar>
+            <ButtonSidebar text="Favorite">
+              <Link href="/bookmark">
+                <Button
+                  variant={"ghost"}
+                  className="w-full justify-center rounded-none  hover:text-primary mb-10"
+                >
+                  <GoBookmark
+                    className={
+                      pathname === "/bookmark"
                         ? "text-5xl text-center  text-[#38a482]"
                         : "text-5xl text-center"
                     }

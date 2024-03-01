@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { GoBook, GoHeart } from "react-icons/go";
+import { GoBook, GoBookmark, GoHeart } from "react-icons/go";
 import { Button } from "../ui/button";
 import ButtonSidebar from "./buttonSidebar";
 import { usePathname } from "next/navigation";
@@ -31,6 +31,20 @@ export default function Fotbar() {
           <GoHeart
             className={
               pathname === "/favorite"
+                ? "text-2xl text-center  text-[#38a482]"
+                : "text-2xl text-center  "
+            }
+          />
+        </Button>
+      </Link>
+      <Link href="/bookmark">
+        <Button
+          variant={"ghost"}
+          className=" justify-center h-full  hover:text-primary"
+        >
+          <GoBookmark
+            className={
+              pathname === "/bookmark"
                 ? "text-2xl text-center  text-[#38a482]"
                 : "text-2xl text-center  "
             }
