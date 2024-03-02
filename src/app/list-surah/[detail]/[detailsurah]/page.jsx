@@ -7,13 +7,17 @@ import { GoBookmark, GoBookmarkFill, GoHeart } from "react-icons/go";
 import DaftarSurah from "@/components/surah/index";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
+import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+import { FaPause } from "react-icons/fa6";
+import { FiPlay } from "react-icons/fi";
+import ReactPlayer from "react-player";
 
 const DetailSurah = ({ params }) => {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
   const [bookMarkItems, setBookMarkItems] = useState([]);
-  const [isLoadingBookMark, setLoadingBookMark] = useState(true);
   const scrollRef = useRef(null);
+  const [playingIndex, setPlayingIndex] = useState(null);
 
   useEffect(() => {
     fetch(`https://equran.id/api/v2/surat/${params.detail}`)
@@ -48,6 +52,9 @@ const DetailSurah = ({ params }) => {
       }, 100); // Tambahkan penundaan 100 milidetik
     }
   }, [isLoading, params.detailsurah]);
+  const handleCloseDrawer = () => {
+    setPlayingIndex(null);
+  };
 
   if (!data) return <></>;
 
@@ -94,7 +101,7 @@ const DetailSurah = ({ params }) => {
         />
       </div>
       <ScrollArea className="h-screen lg:w-[70%] w-[100%] mb-16 ">
-        {data.data.ayat.map((item) => (
+        {data.data.ayat.map((item, index) => (
           <div
             key={item.nomorAyat}
             id={`ayat-${item.nomorAyat}`}
@@ -105,28 +112,54 @@ const DetailSurah = ({ params }) => {
               <div className="text-lg rounded-full bg-cyan-100 dark:bg-[#38a482] px-3 py-1">
                 {item.nomorAyat}
               </div>
-              <div>
-                {bookMarkItems.some(
-                  (bookMarkItem) =>
-                    bookMarkItem.nomorAyat === item.nomorAyat &&
-                    bookMarkItem.nomorSurah === params.detail
-                ) ? (
-                  <FaBookmark
-                    className="text-3xl cursor-pointer text-[#38a482]"
-                    onClick={(event) => {
-                      event.preventDefault();
-                      removeFromBookMark(item, event);
-                    }}
-                  />
-                ) : (
-                  <FaRegBookmark
-                    className="text-3xl cursor-pointer"
-                    onClick={(event) => {
-                      event.preventDefault();
-                      handleBookMarktClick(item, event);
-                    }}
-                  />
-                )}
+              <div className="grid grid-cols-2 gap-1">
+                <div>
+                  {bookMarkItems.some(
+                    (bookMarkItem) =>
+                      bookMarkItem.nomorAyat === item.nomorAyat &&
+                      bookMarkItem.nomorSurah === params.detail
+                  ) ? (
+                    <FaBookmark
+                      className="text-3xl cursor-pointer text-[#38a482]"
+                      onClick={(event) => {
+                        event.preventDefault();
+                        removeFromBookMark(item, event);
+                      }}
+                    />
+                  ) : (
+                    <FaRegBookmark
+                      className="text-3xl cursor-pointer"
+                      onClick={(event) => {
+                        event.preventDefault();
+                        handleBookMarktClick(item, event);
+                      }}
+                    />
+                  )}
+                </div>
+                <div>
+                  <Drawer onClose={handleCloseDrawer}>
+                    <DrawerTrigger asChild>
+                      {playingIndex === index ? (
+                        <FaPause className="text-3xl" />
+                      ) : (
+                        <FiPlay
+                          className="text-4xl cursor-pointer "
+                          onClick={() => setPlayingIndex(index)}
+                        />
+                      )}
+                    </DrawerTrigger>
+                    <DrawerContent>
+                      <ReactPlayer
+                        url={item.audio["01"]}
+                        controls
+                        width={1500}
+                        height={60}
+                        playing={playingIndex === index}
+                        onEnded={() => setPlayingIndex(null)}
+                      />
+                    </DrawerContent>
+                  </Drawer>
+                </div>
               </div>
             </div>
             <div>

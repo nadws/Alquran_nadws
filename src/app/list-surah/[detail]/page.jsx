@@ -7,26 +7,17 @@ import { GoBookmark, GoBookmarkFill, GoHeart } from "react-icons/go";
 import DaftarSurah from "@/components/surah/index";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { FaBookmark, FaPlay, FaRegBookmark } from "react-icons/fa";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { CiPlay1 } from "react-icons/ci";
+import { FaPause } from "react-icons/fa6";
 import ReactPlayer from "react-player";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+import { FiPlay } from "react-icons/fi";
 
 const Detail = ({ params }) => {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
   const [bookMarkItems, setBookMarkItems] = useState([]);
+  const [playing, setPlaying] = useState(false);
+  const [playingIndex, setPlayingIndex] = useState(null);
 
   useEffect(() => {
     fetch(`https://equran.id/api/v2/surat/${params.detail}`)
@@ -47,6 +38,10 @@ const Detail = ({ params }) => {
       setLoading(false);
     }
   }, []);
+
+  const handleCloseDrawer = () => {
+    setPlayingIndex(null);
+  };
 
   if (isLoading) return;
   <p>Loading ...</p>;
@@ -96,7 +91,7 @@ const Detail = ({ params }) => {
         />
       </div>
       <ScrollArea className="h-screen lg:w-[70%] w-[100%] mb-16 ">
-        {data.data.ayat.map((item) => (
+        {data.data.ayat.map((item, index) => (
           <div
             key={item.nomorAyat}
             className="grid grid-rows-1 mb-2 bg-background border border-border p-8 rounded-lg"
@@ -105,7 +100,7 @@ const Detail = ({ params }) => {
               <div className="text-lg rounded-full bg-cyan-100 dark:bg-[#38a482] px-3 py-1">
                 {item.nomorAyat}
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-1">
                 <div>
                   {bookMarkItems.some(
                     (bookMarkItem) =>
@@ -130,16 +125,25 @@ const Detail = ({ params }) => {
                   )}
                 </div>
                 <div>
-                  <Drawer>
+                  <Drawer onClose={handleCloseDrawer}>
                     <DrawerTrigger asChild>
-                      <CiPlay1 className="text-3xl cursor-pointer text-[#38a482]" />
+                      {playingIndex === index ? (
+                        <FaPause className="text-3xl" />
+                      ) : (
+                        <FiPlay
+                          className="text-4xl cursor-pointer "
+                          onClick={() => setPlayingIndex(index)}
+                        />
+                      )}
                     </DrawerTrigger>
                     <DrawerContent>
                       <ReactPlayer
-                        url="https://equran.nos.wjv-1.neo.id/audio-full/Abdullah-Al-Juhany/001.mp3"
+                        url={item.audio["01"]}
                         controls
                         width={1500}
                         height={60}
+                        playing={playingIndex === index}
+                        onEnded={() => setPlayingIndex(null)}
                       />
                     </DrawerContent>
                   </Drawer>
