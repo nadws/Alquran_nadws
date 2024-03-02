@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { GoBookmark, GoBookmarkFill, GoHeart } from "react-icons/go";
 import DaftarSurah from "@/components/surah/index";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 
 const Detail = ({ params }) => {
   const [data, setData] = useState(null);
@@ -70,7 +71,7 @@ const Detail = ({ params }) => {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:flex lg:flex-row">
+    <div className="grid grid-cols-1 lg:flex lg:flex-row ml-4">
       <div className="lg:w-[30%] w-[100%] lg:mr-5 p-1 lg:p-0">
         <DaftarSurah
           params={params.detail}
@@ -95,7 +96,7 @@ const Detail = ({ params }) => {
                     bookMarkItem.nomorAyat === item.nomorAyat &&
                     bookMarkItem.nomorSurah === params.detail
                 ) ? (
-                  <GoBookmarkFill
+                  <FaBookmark
                     className="text-3xl cursor-pointer text-[#38a482]"
                     onClick={(event) => {
                       event.preventDefault();
@@ -103,7 +104,7 @@ const Detail = ({ params }) => {
                     }}
                   />
                 ) : (
-                  <GoBookmark
+                  <FaRegBookmark
                     className="text-3xl cursor-pointer"
                     onClick={(event) => {
                       event.preventDefault();

@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from "react";
 import { GoBookmark, GoBookmarkFill, GoHeart } from "react-icons/go";
 import DaftarSurah from "@/components/surah/index";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 
 const DetailSurah = ({ params }) => {
   const [data, setData] = useState(null);
@@ -40,6 +41,7 @@ const DetailSurah = ({ params }) => {
     if (!isLoading && nomorAyat) {
       setTimeout(() => {
         const targetElement = document.getElementById(`ayat-${nomorAyat}`);
+
         if (targetElement) {
           targetElement.scrollIntoView({ behavior: "auto", block: "start" });
         }
@@ -109,7 +111,7 @@ const DetailSurah = ({ params }) => {
                     bookMarkItem.nomorAyat === item.nomorAyat &&
                     bookMarkItem.nomorSurah === params.detail
                 ) ? (
-                  <GoBookmarkFill
+                  <FaBookmark
                     className="text-3xl cursor-pointer text-[#38a482]"
                     onClick={(event) => {
                       event.preventDefault();
@@ -117,7 +119,7 @@ const DetailSurah = ({ params }) => {
                     }}
                   />
                 ) : (
-                  <GoBookmark
+                  <FaRegBookmark
                     className="text-3xl cursor-pointer"
                     onClick={(event) => {
                       event.preventDefault();

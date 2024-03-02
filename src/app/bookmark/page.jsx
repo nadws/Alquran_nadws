@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { GoBookmark, GoBookmarkFill } from "react-icons/go";
 
 export default function Bookmark() {
@@ -83,15 +84,15 @@ export default function Bookmark() {
                             {bookMarkStatus[
                               `${item.nomorAyat}_${item.nomorSurah}`
                             ] ? (
-                              <GoBookmark
-                                className="text-2xl lg:text-4xl text-slate-400 cursor-pointer"
+                              <FaRegBookmark
+                                className="text-2xl lg:text-4xl  cursor-pointer"
                                 onClick={(event) => {
                                   event.preventDefault(); // Menghentikan penyebaran event
                                   addToBookMark(item);
                                 }}
                               />
                             ) : (
-                              <GoBookmarkFill
+                              <FaBookmark
                                 className="text-2xl lg:text-4xl text-[#38a482] cursor-pointer"
                                 onClick={(event) => {
                                   event.preventDefault();

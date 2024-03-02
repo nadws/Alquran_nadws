@@ -31,6 +31,26 @@ export default function DaftarSurah({ params, namaLatin, jumlahAyat, arti }) {
     }
   }, []);
 
+  useEffect(() => {
+    const nomorSurah = params;
+
+    if (!isLoading && nomorSurah) {
+      setTimeout(() => {
+        const targetElementsurah = document.getElementById(
+          `surah-${nomorSurah}`
+        );
+        console.log("Target Element:", targetElementsurah);
+
+        if (targetElementsurah) {
+          targetElementsurah.scrollIntoView({
+            behavior: "auto",
+            block: "start",
+          });
+        }
+      }, 100); // Tambahkan penundaan 100 milidetik
+    }
+  }, [isLoading, params.detail]);
+
   const handleHeartClick = (item, event) => {
     const isItemInFavorites = favoriteItems.some(
       (favoriteItem) => favoriteItem.nomor === item.nomor
@@ -87,9 +107,10 @@ export default function DaftarSurah({ params, namaLatin, jumlahAyat, arti }) {
             dataAyat.data.map((item) => (
               <Card
                 className={`cursor-pointer rounded-lg  mb-5 lg:mb-0 ${
-                  params == item.nomor ? "active" : ""
+                  params == item.nomor ? "border-4 border-[#4df0bc]" : ""
                 }`}
                 key={item.nomor}
+                id={`surah-${item.nomor}`}
               >
                 <Link href={`/list-surah/${encodeURIComponent(item.nomor)}`}>
                   <CardContent className="h-36 p-6">
