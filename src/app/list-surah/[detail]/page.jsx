@@ -6,7 +6,22 @@ import { useState, useEffect } from "react";
 import { GoBookmark, GoBookmarkFill, GoHeart } from "react-icons/go";
 import DaftarSurah from "@/components/surah/index";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { FaBookmark, FaRegBookmark } from "react-icons/fa";
+import { FaBookmark, FaPlay, FaRegBookmark } from "react-icons/fa";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { CiPlay1 } from "react-icons/ci";
+import ReactPlayer from "react-player";
+import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 
 const Detail = ({ params }) => {
   const [data, setData] = useState(null);
@@ -90,28 +105,45 @@ const Detail = ({ params }) => {
               <div className="text-lg rounded-full bg-cyan-100 dark:bg-[#38a482] px-3 py-1">
                 {item.nomorAyat}
               </div>
-              <div>
-                {bookMarkItems.some(
-                  (bookMarkItem) =>
-                    bookMarkItem.nomorAyat === item.nomorAyat &&
-                    bookMarkItem.nomorSurah === params.detail
-                ) ? (
-                  <FaBookmark
-                    className="text-3xl cursor-pointer text-[#38a482]"
-                    onClick={(event) => {
-                      event.preventDefault();
-                      removeFromBookMark(item, event);
-                    }}
-                  />
-                ) : (
-                  <FaRegBookmark
-                    className="text-3xl cursor-pointer"
-                    onClick={(event) => {
-                      event.preventDefault();
-                      handleBookMarktClick(item, event);
-                    }}
-                  />
-                )}
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  {bookMarkItems.some(
+                    (bookMarkItem) =>
+                      bookMarkItem.nomorAyat === item.nomorAyat &&
+                      bookMarkItem.nomorSurah === params.detail
+                  ) ? (
+                    <FaBookmark
+                      className="text-3xl cursor-pointer text-[#38a482]"
+                      onClick={(event) => {
+                        event.preventDefault();
+                        removeFromBookMark(item, event);
+                      }}
+                    />
+                  ) : (
+                    <FaRegBookmark
+                      className="text-3xl cursor-pointer"
+                      onClick={(event) => {
+                        event.preventDefault();
+                        handleBookMarktClick(item, event);
+                      }}
+                    />
+                  )}
+                </div>
+                <div>
+                  <Drawer>
+                    <DrawerTrigger asChild>
+                      <CiPlay1 className="text-3xl cursor-pointer text-[#38a482]" />
+                    </DrawerTrigger>
+                    <DrawerContent>
+                      <ReactPlayer
+                        url="https://equran.nos.wjv-1.neo.id/audio-full/Abdullah-Al-Juhany/001.mp3"
+                        controls
+                        width={1500}
+                        height={60}
+                      />
+                    </DrawerContent>
+                  </Drawer>
+                </div>
               </div>
             </div>
             <div>
