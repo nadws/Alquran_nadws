@@ -11,6 +11,7 @@ const DetailSurah = ({ params }) => {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
   const [bookMarkItems, setBookMarkItems] = useState([]);
+  const [isLoadingBookMark, setLoadingBookMark] = useState(true);
   const scrollRef = useRef(null);
 
   useEffect(() => {
@@ -37,15 +38,14 @@ const DetailSurah = ({ params }) => {
 
     // Wait for the component to fully render before scrolling
     if (!isLoading && nomorAyat) {
-      const targetElement = document.getElementById(`ayat-${nomorAyat}`);
-      if (targetElement) {
-        targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
+      setTimeout(() => {
+        const targetElement = document.getElementById(`ayat-${nomorAyat}`);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: "auto", block: "start" });
+        }
+      }, 100); // Tambahkan penundaan 100 milidetik
     }
   }, [isLoading, params.detailsurah]);
-
-  if (isLoading) return;
-  <p>Loading ...</p>;
 
   if (!data) return <></>;
 
@@ -96,6 +96,7 @@ const DetailSurah = ({ params }) => {
           <div
             key={item.nomorAyat}
             id={`ayat-${item.nomorAyat}`}
+            ref={scrollRef}
             className="grid grid-rows-1 mb-2 bg-background border border-border p-8 rounded-lg"
           >
             <div className="flex justify-between items-center mb-10">
