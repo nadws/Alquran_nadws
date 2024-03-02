@@ -55,7 +55,7 @@ export default function Sidebar() {
                 </Button>
               </Link>
             </ButtonSidebar>
-            <ButtonSidebar text="Favorite">
+            <ButtonSidebar text="Bookmark">
               <Link href="/bookmark">
                 <Button
                   variant={"ghost"}
