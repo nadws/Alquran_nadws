@@ -2,15 +2,16 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { GoBookmark, GoBookmarkFill, GoHeart } from "react-icons/go";
 import DaftarSurah from "@/components/surah/index";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
-const Detail = ({ params }) => {
+const DetailSurah = ({ params }) => {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
   const [bookMarkItems, setBookMarkItems] = useState([]);
+  const scrollRef = useRef(null);
 
   useEffect(() => {
     fetch(`https://equran.id/api/v2/surat/${params.detail}`)
@@ -31,6 +32,17 @@ const Detail = ({ params }) => {
       setLoading(false);
     }
   }, []);
+  useEffect(() => {
+    const nomorAyat = params.detailsurah;
+
+    // Wait for the component to fully render before scrolling
+    if (!isLoading && nomorAyat) {
+      const targetElement = document.getElementById(`ayat-${nomorAyat}`);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  }, [isLoading, params.detailsurah]);
 
   if (isLoading) return;
   <p>Loading ...</p>;
@@ -83,6 +95,7 @@ const Detail = ({ params }) => {
         {data.data.ayat.map((item) => (
           <div
             key={item.nomorAyat}
+            id={`ayat-${item.nomorAyat}`}
             className="grid grid-rows-1 mb-2 bg-background border border-border p-8 rounded-lg"
           >
             <div className="flex justify-between items-center mb-10">
@@ -133,4 +146,4 @@ const Detail = ({ params }) => {
   );
 };
 
-export default Detail;
+export default DetailSurah;
