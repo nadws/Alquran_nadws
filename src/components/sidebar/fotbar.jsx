@@ -4,6 +4,7 @@ import { GoBook, GoBookmark, GoHeart } from "react-icons/go";
 import { Button } from "../ui/button";
 import ButtonSidebar from "./buttonSidebar";
 import { usePathname } from "next/navigation";
+import { SlBookOpen } from "react-icons/sl";
 
 export default function Fotbar() {
   const pathname = usePathname();
@@ -45,6 +46,20 @@ export default function Fotbar() {
           <GoBookmark
             className={
               pathname === "/bookmark"
+                ? "text-2xl text-center  text-[#38a482]"
+                : "text-2xl text-center  "
+            }
+          />
+        </Button>
+      </Link>
+      <Link href="/doa">
+        <Button
+          variant={"ghost"}
+          className=" justify-center h-full  hover:text-primary"
+        >
+          <SlBookOpen
+            className={
+              pathname === "/doa"
                 ? "text-2xl text-center  text-[#38a482]"
                 : "text-2xl text-center  "
             }
