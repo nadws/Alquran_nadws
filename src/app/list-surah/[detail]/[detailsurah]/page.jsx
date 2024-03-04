@@ -150,7 +150,7 @@ const DetailSurah = ({ params }) => {
                     </DrawerTrigger>
                     <DrawerContent>
                       <ReactPlayer
-                        url={item.audio["01"]}
+                        url={item.audio["05"]}
                         controls
                         width={1500}
                         height={60}
