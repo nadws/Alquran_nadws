@@ -6,7 +6,13 @@ import { useState, useEffect, useRef } from "react";
 import { GoBookmark, GoBookmarkFill, GoHeart } from "react-icons/go";
 import DaftarSurah from "@/components/surah/index";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { FaBookmark, FaRegBookmark } from "react-icons/fa";
+import {
+  FaBookmark,
+  FaPauseCircle,
+  FaPlay,
+  FaPlayCircle,
+  FaRegBookmark,
+} from "react-icons/fa";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { FaPause } from "react-icons/fa6";
 import { FiPlay } from "react-icons/fi";
@@ -140,10 +146,10 @@ const DetailSurah = ({ params }) => {
                   <Drawer onClose={handleCloseDrawer}>
                     <DrawerTrigger asChild>
                       {playingIndex === index ? (
-                        <FaPause className="text-3xl" />
+                        <FaPauseCircle className="text-3xl text-[#38a482]" />
                       ) : (
-                        <FiPlay
-                          className="text-4xl cursor-pointer "
+                        <FaPlayCircle
+                          className="text-3xl cursor-pointer text-[#38a482]"
                           onClick={() => setPlayingIndex(index)}
                         />
                       )}
