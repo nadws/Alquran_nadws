@@ -32,7 +32,7 @@ const Doa = ({ params }) => {
   };
 
   const filteredData = data
-    ? data.data.filter((item) => {
+    ? data.filter((item) => {
         const searchTermRegex = new RegExp(
           searchTerm.toLowerCase().split("").join(".*")
         );
