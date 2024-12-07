@@ -32,11 +32,11 @@ const Doa = ({ params }) => {
   };
 
   const filteredData = data
-    ? data.filter((item) => {
+    ? data.data.filter((item) => {
         const searchTermRegex = new RegExp(
           searchTerm.toLowerCase().split("").join(".*")
         );
-        return searchTermRegex.test(item.judul.toLowerCase());
+        return searchTermRegex.test(item.doa.toLowerCase());
       })
     : [];
   console.log(filteredData);
