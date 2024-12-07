@@ -19,7 +19,7 @@ const Doa = ({ params }) => {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://api.dikiotang.com/doa")
+    fetch("https://doa-doa-api-ahmadramadhan.fly.dev/api")
       .then((res) => res.json())
       .then((data) => {
         setData(data);
@@ -63,22 +63,22 @@ const Doa = ({ params }) => {
               index // Menggunakan filteredData yang sudah difilter
             ) => (
               <div
-                key={item.judul}
+                key={item.doa}
                 className="grid grid-rows-1 mb-2 bg-background border border-border p-8 rounded-lg"
               >
                 <div className="flex justify-between items-center mb-10">
-                  {item.judul}
+                  {item.doa}
                 </div>
                 <div>
                   <div>
                     <p className="text-end mb-6 leading-loose lg:leading-loose text-xl lg:text-2xl text-gray-500 dark:text-white font-lpmq">
-                      {item.arab}
+                      {item.ayat}
                     </p>
                     <p className="text-start text-sm lg:text-lg mb-2 text-[#38a482]">
-                      {item.indo}
+                      {item.latin}
                     </p>
                     <p className="text-start text-sm lg:text-lg ">
-                      {item.teksIndonesia}
+                      {item.artinya}
                     </p>
                   </div>
                 </div>
