@@ -32,14 +32,14 @@ const Doa = ({ params }) => {
   };
 
   const filteredData = data
-    ? data.filter((item) => {
+    ? data.data.filter((item) => {
         const searchTermRegex = new RegExp(
           searchTerm.toLowerCase().split("").join(".*")
         );
         return searchTermRegex.test(item.judul.toLowerCase());
       })
     : [];
-
+  console.log(filteredData);
   if (isLoading) return <p>Loading ...</p>; // Mengatasi kasus ketika data masih dimuat
 
   if (!data) return <></>; // Mengatasi kasus ketika data belum tersedia
@@ -63,7 +63,7 @@ const Doa = ({ params }) => {
               index // Menggunakan filteredData yang sudah difilter
             ) => (
               <div
-                key={item.doa}
+                key={item.id}
                 className="grid grid-rows-1 mb-2 bg-background border border-border p-8 rounded-lg"
               >
                 <div className="flex justify-between items-center mb-10">
